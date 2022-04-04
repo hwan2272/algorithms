@@ -6,6 +6,42 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 public class TEST {
     public static void main(String[] args) throws Exception {
+        //자주쓰는 함수 정리
+        //Scanner
+        //Scanner.nextInt
+        //Scanner.next
+        //Scanner.nextLine
+        //Scanner.nextBigInteger
+
+        //Character
+        //Character.toString
+        //Character.valueOf
+
+        //String
+        //String.toString
+        //String.valueOf
+        //String.indexOf
+        //String.charAt
+        
+        //Integer
+        //Integer.parseInt
+        //Integer.valueOf
+
+        //BigInteger
+        //BigInteger.add
+        //BigInteger.substract
+        //BigInteger.multiply
+        //Biginteger.divide
+        //BigInteger.remainder
+        
+        //[]
+        //[].length
+        //[].size()
+
+        //Arrays
+        //Arrays.sort([])
+
+
         Scanner sc = new Scanner(System.in);
         String result = "";
         int a, b;
