@@ -43,6 +43,36 @@ public class TEST {
 
 
         Scanner sc = new Scanner(System.in);
+        int rowSize = sc.nextInt();
+        int colSize = sc.nextInt();
+
+        String arr[] = new String[rowSize];
+
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = sc.next();
+        }
+
+        int sumDot = 0;
+        int rowGuardsNeeds = 0;
+        for(String data :  arr) {
+            for(int j=0; j<colSize; j++) {
+                if("X".equals(Character.toString((char)data.charAt(j)))) {
+                    sumDot += 0;
+                }
+                else if(".".equals(Character.toString((char)data.charAt(j)))) {
+                    sumDot += 1;
+                }
+            }
+            if(sumDot % colSize == 0) {
+                rowGuardsNeeds += (sumDot / colSize);
+            }
+            sumDot = 0;
+        }
+        System.out.println(rowGuardsNeeds);
+        
+
+
+        /*Scanner sc = new Scanner(System.in);
         String result = "";
         int a, b;
 		a = sc.nextInt();
@@ -65,7 +95,7 @@ public class TEST {
         else if(cal1.after(cal2)) {
             result = "After";
         }
-        System.out.println(result);
+        System.out.println(result);*/
 
         /*Scanner sc = new Scanner(System.in);
 		BigInteger a;
