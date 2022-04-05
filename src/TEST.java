@@ -43,6 +43,85 @@ public class TEST {
 
 
         Scanner sc = new Scanner(System.in);
+        /*String input = sc.next();
+        input = input.toUpperCase();
+        int cnt = 0;
+        String speling = "";
+        int spelingCnt = 0;
+        for(int i=0; i<input.length(); i++) {
+            if(i==0) cnt++;
+            if(i==input.length()-1) continue;
+            if(speling.isEmpty() && input.charAt(i) == input.charAt(i+1)) {
+                cnt++;
+                speling = Character.toString(input.charAt(i));
+                spelingCnt = cnt;
+            }
+            else {
+                if(!speling.isEmpty() && spelingCnt == cnt && input.charAt(i) == input.charAt(i+1)) {
+                    speling = "?";
+                }
+                else {
+                    cnt = 0;
+                }
+            }
+        }
+        System.out.println(speling);*/
+
+        /*int size = sc.nextInt();
+        int[] arr = new int[size];
+
+        int target = sc.nextInt();
+
+        for(int i=0; i<size; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        String answer = "";
+        for(int i=0; i<size; i++) {
+            if(target > arr[i]) {
+                answer += arr[i] + " ";
+            }
+        }
+        System.out.println(answer);*/
+
+
+
+        /*int[] arr = new int[11];
+        for(int i=0; i<10; i++) {
+            arr[i] = sc.nextInt();
+            arr[i] = arr[i] % 42;
+        }
+
+        Arrays.sort(arr);
+
+        int cnt = 0;
+        for(int i=0; i<11; i++) {
+            if(i==0) cnt++;
+            if(i==10) continue;
+            if(i!= 0 && arr[i] != arr[i+1]) {
+                cnt++;
+            }
+        }
+        System.out.println(cnt);*/
+        
+        
+		/*int size;
+		size = sc.nextInt();
+        int[] arr = new int[size];
+		for(int i=0; i<size; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        Arrays.sort(arr);
+        int max = arr[size-1];
+
+        double sum = 0;
+        for(int i=0; i<size; i++) {
+            sum += (arr[i] / (double)max * 100);
+        }
+        System.out.println((sum / (double)size));*/
+
+        /*Scanner sc = new Scanner(System.in);
         int rowSize = sc.nextInt();
         int colSize = sc.nextInt();
 
@@ -68,7 +147,7 @@ public class TEST {
             }
             sumDot = 0;
         }
-        System.out.println(rowGuardsNeeds);
+        System.out.println(rowGuardsNeeds);*/
         
 
 
