@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.math.BigInteger;
+import java.rmi.ConnectIOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,6 +22,90 @@ class Print {
 }
 
 public class TEST {
+
+    public static String MGsolution(String sentence) {
+         //      안쓴 알파벳 소문자 오름차순으로 출력
+        //      다 썼으면 "perfect" 출력
+        StringBuilder sb = new StringBuilder();
+        sentence = sentence.toLowerCase();
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        char[] charArr = alphabet.toCharArray();
+
+        for(int i=0; i<sentence.length(); i++) {
+            if(sentence.charAt(i) != ' ') {
+                for(int j=0; j<charArr.length; j++) {
+                    if(charArr[j] != ' ') {
+                        if(sentence.charAt(i) == charArr[j]) {
+                            sentence.replace(sentence.charAt(i), ' ');
+                            charArr[j] = ' ';
+                        }
+                    }
+                }
+            }
+        }
+
+        Arrays.sort(charArr);
+        for(char data : charArr) {
+            if(data != ' ') {
+                sb.append(data).append(System.lineSeparator());
+            }
+        }
+        sb.append("perfect").append(System.lineSeparator());
+        return sb.toString();
+
+     }
+
+     public static int MGsolution2(int p) {
+         //      1987년 시작해서 11987 되기 전에 겹치는 숫자가 없는 제일 작은 연도, 없으면 -1
+         int cnt = 10000;
+         int year = -1;
+      
+         while (cnt-- > 0) {
+            int target =  p+cnt;
+            String targetStr = String.valueOf(target);
+            char[] arr = targetStr.toCharArray();
+
+            boolean duplYn = false;
+            for(int i=0; i<arr.length; i++) {
+                for(int j=i+1; j<arr.length; j++) {
+                    if(arr[i] == arr[j]) {
+                        duplYn = true;
+                        break;
+                    }
+                }
+            }
+            if(duplYn == false) {
+                if(target != 1987) { 
+                    year = target;
+                }
+            }
+         }
+         return year;
+         //return -1;
+     }
+
+     public static int MGsolution3(String a, String b) {
+        //      숫자만 뽑아서 두 수의 합 구하기
+        String buf1 = "";
+        String buf2 = "";
+
+        char [] arr1 = a.toCharArray();
+        char [] arr2 = b.toCharArray();
+
+        for(char data1 : arr1) {
+            if(Character.isDigit(data1)) {
+                buf1 += data1;
+            }
+        }
+
+        for(char data2 : arr2) {
+            if(Character.isDigit(data2)) {
+                buf2 += data2;
+            }
+        }
+
+       return Integer.parseInt(buf1) + Integer.parseInt(buf2);
+    }
     
     public static void main(String[] args) throws Exception {
         //자주쓰는 함수 정리
@@ -58,7 +143,27 @@ public class TEST {
         //Arrays
         //Arrays.sort([])
 
-        Scanner sc = new Scanner(System.in);
+        
+
+        //      안쓴 알파벳 소문자 오름차순으로 출력
+        //      다 썼으면 "perfect" 출력
+
+        /*
+        System.out.println(MGsolution(
+            "His comments came after Pyongyang " +
+            "announced it had a plan to fire four " +
+            "missiles near the US territory of Guam."
+        ));//bjkqvwxz
+        */
+
+        //      1987년 시작해서 11987 되기 전에 겹치는 숫자가 없는 제일 작은 연도, 없으면 -1
+        System.out.println(MGsolution2(1987));
+
+        //      숫자만 뽑아서 두 수의 합 구하기
+        //System.out.println(MGsolution3("1dsg11asdfg1", "asdf8889"));//10000
+
+
+        /*Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
         while(sc.hasNext()) {
             int a = sc.nextInt();
@@ -73,16 +178,6 @@ public class TEST {
                 arr[1] = b;
                 arr[2] = c;
                 Arrays.sort(arr);
-
-
-                /*if(a/3 == b/4 && b/4 == c/5 &&
-                    a%3 == 0 && b%4 == 0 && c%5 == 0) {
-                        sb.append("right").append(System.lineSeparator());
-                }
-                else if(a/5 == b/4 && b/4 == c/3 &&
-                    a%5 == 0 && b%4 == 0 && c%3 == 0) {
-                        sb.append("right").append(System.lineSeparator());
-                }*/
                 if(Math.pow(arr[0], 2) + Math.pow(arr[1], 2) == Math.pow(arr[2], 2)) {
                     sb.append("right").append(System.lineSeparator());
                 }
@@ -95,7 +190,7 @@ public class TEST {
                 }
             }
         }
-        System.out.println(sb);
+        System.out.println(sb);*/
 
 
         /*Scanner sc = new Scanner(System.in);
