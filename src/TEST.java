@@ -1,10 +1,27 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+
+        
+class Print {
+    int id;
+    int data;
+
+    public Print(int id, int data) {
+        this.id = id;
+        this.data = data;
+    }
+
+}
+
 public class TEST {
+    
     public static void main(String[] args) throws Exception {
         //자주쓰는 함수 정리
         //Scanner
@@ -41,8 +58,159 @@ public class TEST {
         //Arrays
         //Arrays.sort([])
 
-
         Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
+        while(sc.hasNext()) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            if(a == 0 || b == 0 || c == 0) {
+                break;
+            }
+            else {
+                int[] arr = new int[3];
+                arr[0] = a;
+                arr[1] = b;
+                arr[2] = c;
+                Arrays.sort(arr);
+
+
+                /*if(a/3 == b/4 && b/4 == c/5 &&
+                    a%3 == 0 && b%4 == 0 && c%5 == 0) {
+                        sb.append("right").append(System.lineSeparator());
+                }
+                else if(a/5 == b/4 && b/4 == c/3 &&
+                    a%5 == 0 && b%4 == 0 && c%3 == 0) {
+                        sb.append("right").append(System.lineSeparator());
+                }*/
+                if(Math.pow(arr[0], 2) + Math.pow(arr[1], 2) == Math.pow(arr[2], 2)) {
+                    sb.append("right").append(System.lineSeparator());
+                }
+                else if(arr[0]%3 == arr[1]/4 && arr[1]/4 == arr[2]/5 &&
+                    arr[0]%3 == 0 && arr[1]%4 == 0 && arr[2]%5 == 0) {
+                    sb.append("right").append(System.lineSeparator());
+                }
+                else {
+                    sb.append("wrong").append(System.lineSeparator());
+                }
+            }
+        }
+        System.out.println(sb);
+
+
+        /*Scanner sc = new Scanner(System.in);
+        int maxNum = sc.nextInt();
+        Queue<Integer> q = new LinkedList();
+        
+        for(int i=1; i<maxNum+1; i++) {
+            q.offer(i);
+        }
+        
+        int num = 0;
+        while(!q.isEmpty()) {
+            if(q.size() == 1) {
+                num = q.peek();
+                break;
+            }
+            num = q.poll();
+            num = q.poll();
+            q.offer(num);
+        }
+        
+        System.out.println(num);*/
+
+        /*Scanner sc = new Scanner(System.in);
+        int caseSize = sc.nextInt();
+        int[] caseArr = new int[caseSize];
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=0; i<caseArr.length; i++) {
+            int printsCnt = sc.nextInt();
+            int targetIdx = sc.nextInt();
+            Queue<Print> q = new LinkedList<>();
+            for(int j=0; j<printsCnt; j++) {
+                Print p = new Print(j, sc.nextInt());
+                q.offer(p);
+            }
+
+            
+            int cnt = 0;
+            while(!q.isEmpty()) {
+                Print qPoll = q.poll();
+                for(Print qData : q) {
+                    if(qPoll.data < qData.data) {
+                        q.offer(qPoll);
+                        qPoll = null;
+                        break;
+                    }
+                }
+                if(qPoll != null) {
+                    cnt++;
+                    if(qPoll.id == targetIdx) {
+                        sb.append(cnt).append(System.lineSeparator());
+                    }
+                }
+            }
+        }
+        System.out.println(sb);*/
+
+
+        
+
+        /*Scanner sc = new Scanner(System.in);
+        int afternoon = sc.nextInt();
+        int night = sc.nextInt();
+        int goal = sc.nextInt();
+        int cnt = (int)(Math.ceil((goal-night) / (double)(afternoon-night)));
+
+        System.out.println(cnt);*/
+
+
+        /*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        int size = Integer.parseInt(br.readLine());
+        String[] commandsArr = new String[size];
+        Queue<Integer> q = new LinkedList();
+        StringBuilder sb = new StringBuilder();
+
+        int offerVal = 0;
+        int backVal = 0;
+        for(int i=0; i<commandsArr.length; i++) {
+            String commands = br.readLine();
+            if(commands.contains("push")) {
+                String[] pushCommArr = commands.split(" ");
+                commands = pushCommArr[0];
+                offerVal = Integer.parseInt(pushCommArr[1]);
+            }
+            switch(commands) {
+                case "push" :
+                    q.offer(offerVal);
+                    backVal = offerVal;
+                break;
+                case "pop" :
+                    sb.append(q.isEmpty() ? -1 : q.poll()).append(System.lineSeparator());
+                break;
+                case "size" :
+                    sb.append(q.size()).append(System.lineSeparator());
+                break;
+                case "empty" :
+                    sb.append(q.isEmpty() ? 1 : 0).append(System.lineSeparator());
+                break;
+                case "front" :
+                    sb.append(q.isEmpty() ? -1 : q.peek()).append(System.lineSeparator());
+                break;
+                case "back" :
+                    sb.append(q.isEmpty() ? -1 : backVal).append(System.lineSeparator());
+                break;
+                default :
+                break;
+            }
+        }
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();*/
+
         /*String input = sc.next();
         input = input.toUpperCase();
         int cnt = 0;
