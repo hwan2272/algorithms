@@ -143,7 +143,38 @@ public class TEST {
         //Arrays
         //Arrays.sort([])
 
-        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String readLine = br.readLine();
+        int size = Integer.valueOf(readLine.split(" ")[0]);
+        int questions = Integer.valueOf(readLine.split(" ")[1]);
+        Map<Integer, String> dictionaryMap = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=0; i<size; i++) {
+            dictionaryMap.put(i+1, br.readLine());
+        }
+
+        for(int i=0; i<questions; i++) {
+            String question = br.readLine();
+            if(Character.isDigit(question.charAt(0))) {
+                int index = Integer.valueOf(question);
+                //System.out.println(dictionaryMap.get(index));
+                sb.append(dictionaryMap.get(index)).append(System.lineSeparator());
+            }
+            else {
+                for(int j=1; j<=dictionaryMap.size(); j++) {
+                    if(dictionaryMap.get(j).toUpperCase().equals(question.toUpperCase())) {
+                        //System.out.println(j);
+                        sb.append(j).append(System.lineSeparator());
+                        break;
+                    }
+                }
+            }
+        }
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
 
         //      안쓴 알파벳 소문자 오름차순으로 출력
         //      다 썼으면 "perfect" 출력
@@ -157,7 +188,7 @@ public class TEST {
         */
 
         //      1987년 시작해서 11987 되기 전에 겹치는 숫자가 없는 제일 작은 연도, 없으면 -1
-        System.out.println(MGsolution2(1987));
+        //System.out.println(MGsolution2(1987));
 
         //      숫자만 뽑아서 두 수의 합 구하기
         //System.out.println(MGsolution3("1dsg11asdfg1", "asdf8889"));//10000
