@@ -7,23 +7,9 @@ import java.rmi.ConnectIOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-
-        
-class Print {
-    int id;
-    int data;
-
-    public Print(int id, int data) {
-        this.id = id;
-        this.data = data;
-    }
-
-}
-
 public class TEST {
 
-    public static String MGsolution(String sentence) {
+    /*public static String MGsolution(String sentence) {
          //      안쓴 알파벳 소문자 오름차순으로 출력
         //      다 썼으면 "perfect" 출력
         StringBuilder sb = new StringBuilder();
@@ -106,8 +92,145 @@ public class TEST {
 
        return Integer.parseInt(buf1) + Integer.parseInt(buf2);
     }
+
+    public static String binarySearch(String[] dicArr, String question) {
+        int mid = 0;
+        int start = 0;
+        int end = dicArr.length-1;
+        System.out.println("current question :::: "+ question + " ");
+
+        while(start <= end) {
+            mid = (start+end)/2;
+
+            String key = dicArr[mid].split("_")[1];
+            String value = dicArr[mid].split("_")[0];
+            System.out.println("current Mid :::: "+ key + " " + value);
+
+            if(Character.isDigit(question.charAt(0))) {
+                if(Integer.valueOf(key) == Integer.valueOf(question)) {
+                    return value;
+                }
+                else {
+                    if(Integer.valueOf(question) > Integer.valueOf(key)) {
+                        start=mid+1;
+                    }
+                    else {
+                        end=mid-1;
+                    }
+                }
+            }
+            else {
+                if(value.toUpperCase().equals(question.toUpperCase())) {
+                    return key;
+                }
+                else {
+                    if(question.toUpperCase().charAt(0) > value.toUpperCase().charAt(0)) {
+                        start=mid+1;
+                    }
+                    else {
+                        end=mid-1;
+                    }
+                }
+            }
+        }
+        return "";
+    } */
+    static BigInteger[][] arr = new BigInteger[101][101];
+    public static BigInteger DFSCombination(int n, int m) {
+        BigInteger big0 = new BigInteger("0");
+        BigInteger big1 = new BigInteger("1");
+
+        if(arr[n][m]!=null && arr[n][m].compareTo(big0) == 1) return arr[n][m];
+        if(n==m || m==0) return big1;
+        else return 
+        arr[n][m] =
+            DFSCombination(n-1, m-1).add(
+            DFSCombination(n-1, m));
+    }
     
-    public static void main(String[] args) throws Exception {
+    static int k;
+    static int gcd;
+    static int lcm;
+    static StringBuilder sb = new StringBuilder();
+    static StringBuilder resultSb = new StringBuilder();
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        /*int n = sc.nextInt();
+        for(int i=0; i<n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            sb.append(getLcm(a,b)).append(System.lineSeparator());
+        }
+        System.out.println(sb);*/
+
+        //Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()) {
+            int a = sc.nextInt();
+            if(a == 0) {
+                break;
+            }
+
+            StringBuilder sb = new StringBuilder(String.valueOf(a));
+            StringBuilder sbR = new StringBuilder(String.valueOf(a)).reverse();
+
+            System.out.println(Integer.parseInt(sb.toString()) + ":::" + Integer.parseInt(sbR.toString()));
+            
+            if(sb.toString().equals(sbR.toString())) {
+                resultSb.append("yes").append(System.lineSeparator());
+            }
+            else {
+                resultSb.append("no").append(System.lineSeparator());
+            }
+
+            
+            
+        }
+        System.out.println(resultSb);
+    }
+
+    public static int getGcd(int a, int b) {
+        int[] arr = new int[2];
+        arr[0] = a;
+        arr[1] = b;
+        Arrays.sort(arr);
+        k = arr[0];
+        while(k>0) {
+            if(a%k == 0 && b%k == 0) {
+                gcd = k;
+                return gcd;
+            }
+            k--;
+        }
+        
+        return -1;
+    }
+    
+    public static int getLcm(int a, int b) {
+        int[] arr = new int[2];
+        arr[0] = a;
+        arr[1] = b;
+        Arrays.sort(arr);
+        
+        int max = arr[1];
+        int min = arr[0];
+        int divided = min;
+
+        while(divided>0) {
+            if(max%min == 0) {
+                gcd = min;
+                return arr[1]*arr[0]/gcd;
+            }
+            else {
+                divided = max%min;
+                max = min;
+                min = divided;
+            }
+        }
+        
+        return -1;
+    }
+    
+    //public static void main(String[] args) throws Exception {
         //자주쓰는 함수 정리
         //Scanner
         //Scanner.nextInt
@@ -143,38 +266,27 @@ public class TEST {
         //Arrays
         //Arrays.sort([])
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        /*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String readLine = br.readLine();
         int size = Integer.valueOf(readLine.split(" ")[0]);
         int questions = Integer.valueOf(readLine.split(" ")[1]);
-        Map<Integer, String> dictionaryMap = new HashMap<>();
+        String[] dicArr = new String[size];
         StringBuilder sb = new StringBuilder();
 
         for(int i=0; i<size; i++) {
-            dictionaryMap.put(i+1, br.readLine());
+            String name = br.readLine();
+            //dicArr[i] = name + "_" + i;
+            //dicArr[i] = i+1 + "_" + name;
+            dicArr[i] = name + "_" + (i+1);
         }
-
-        for(int i=0; i<questions; i++) {
-            String question = br.readLine();
-            if(Character.isDigit(question.charAt(0))) {
-                int index = Integer.valueOf(question);
-                //System.out.println(dictionaryMap.get(index));
-                sb.append(dictionaryMap.get(index)).append(System.lineSeparator());
-            }
-            else {
-                for(int j=1; j<=dictionaryMap.size(); j++) {
-                    if(dictionaryMap.get(j).toUpperCase().equals(question.toUpperCase())) {
-                        //System.out.println(j);
-                        sb.append(j).append(System.lineSeparator());
-                        break;
-                    }
-                }
-            }
+        Arrays.sort(dicArr);
+        for(int i=0; i<dicArr.length; i++) {
+            System.out.println(dicArr[i]);
         }
         bw.write(sb.toString());
-        bw.flush();
-        bw.close();
+       bw.flush();
+       bw.close();*/
 
         //      안쓴 알파벳 소문자 오름차순으로 출력
         //      다 썼으면 "perfect" 출력
@@ -583,5 +695,5 @@ public class TEST {
         /*Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
         System.out.println(sdf.format(cal.getTime()));*/
-    }
+    //}
 }
