@@ -172,8 +172,6 @@ public class TEST {
 
             StringBuilder sb = new StringBuilder(String.valueOf(a));
             StringBuilder sbR = new StringBuilder(String.valueOf(a)).reverse();
-
-            System.out.println(Integer.parseInt(sb.toString()) + ":::" + Integer.parseInt(sbR.toString()));
             
             if(sb.toString().equals(sbR.toString())) {
                 resultSb.append("yes").append(System.lineSeparator());

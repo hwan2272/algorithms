@@ -4,18 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-class Node {
-    Node lt;
-    Node rt;
-    String data;
-
-    public Node(String val) {
-        data = val;
-        lt = null;
-        rt = null;
-    }
-}
-
 public class RecursionTreeDFS {
     //이진트리순회(깊이우선탐색)
     //재귀+TREE
@@ -155,5 +143,19 @@ public class RecursionTreeDFS {
             DFSSubset(L+1); 
         }
     }
+    
+        
+    public static class Node {
+        Node lt;
+        Node rt;
+        String data;
+
+        public Node(String val) {
+            data = val;
+            lt = null;
+            rt = null;
+        }
+    }
+
 
 }
