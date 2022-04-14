@@ -8,34 +8,37 @@ import java.text.DecimalFormat;
 import java.util.*;
 public class TEST2 {
     static StringBuilder sb = new StringBuilder();
+    public static int getHansuCnt(int n) {
+        System.out.println("cur:::" + n);
+        int cnt = 0;
+        String nStr = String.valueOf(n);
+        char[] nStrArr = nStr.toCharArray();
+        if(nStrArr.length == 3) {
+            if(
+                Integer.valueOf(Character.toString(nStr.charAt(0)))-Integer.valueOf(Character.toString(nStr.charAt(1))) == 
+                Integer.valueOf(Character.toString(nStr.charAt(1)))-Integer.valueOf(Character.toString(nStr.charAt(2)))
+                ) {
+                cnt = 1;
+            }
+            else {
+                cnt = 0;
+            }
+        }
+        else {
+            if(n != 1000) {
+                cnt = 1;
+            }
+        }
+        return cnt;
+    }
+
     public static void main(String args[]) throws Exception {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int m = sc.nextInt();
-        List<Integer> arrList = new ArrayList();
-        int[] arr = new int[n];
-        for(int i=0; i<n; i++) {
-            arr[i] = sc.nextInt();
+        int result = 0;
+        for(int i=1; i<=n; i++) {
+            result += getHansuCnt(i);
         }
-
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                for(int k=0; k<n; k++) {
-                    int card1 = arr[i];
-                    int card2 = arr[j];
-                    int card3 = arr[k];
-                    if(i != j && j != k && k != i) {
-                        arrList.add((card1 + card2 + card3));
-                    }
-                }
-            }
-        }
-        int curM = Integer.MIN_VALUE;
-        for(int x : arrList) {
-            if(x <= m) {
-                curM = Math.max(curM, x);
-            }
-        }
-        System.out.println(curM);
+        System.out.println(result);
     }
 }
