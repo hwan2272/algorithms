@@ -8,37 +8,44 @@ import java.text.DecimalFormat;
 import java.util.*;
 public class TEST2 {
     static StringBuilder sb = new StringBuilder();
-    public static int getHansuCnt(int n) {
-        System.out.println("cur:::" + n);
-        int cnt = 0;
-        String nStr = String.valueOf(n);
-        char[] nStrArr = nStr.toCharArray();
-        if(nStrArr.length == 3) {
-            if(
-                Integer.valueOf(Character.toString(nStr.charAt(0)))-Integer.valueOf(Character.toString(nStr.charAt(1))) == 
-                Integer.valueOf(Character.toString(nStr.charAt(1)))-Integer.valueOf(Character.toString(nStr.charAt(2)))
-                ) {
-                cnt = 1;
+    public static void main(String args[]) throws Exception {
+        //Scanner sc = new Scanner(System.in);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.valueOf(br.readLine());
+        String[] arr = br.readLine().split(" ");
+        String[] resultArr = arr.clone();
+
+        //Stack<String> st = new Stack();
+        Stack<Nums> st = new Stack();
+        for(int i=0; i<n; i++) {
+            while(!st.isEmpty() && Integer.valueOf(arr[st.peek().idx]) < Integer.valueOf(arr[i])) {
+                resultArr[st.pop().idx] = arr[i];
             }
-            else {
-                cnt = 0;
-            }
+            Nums nums = new Nums(i, arr[i]);
+            st.push(nums);
         }
-        else {
-            if(n != 1000) {
-                cnt = 1;
-            }
+
+        while(!st.isEmpty()) {
+            resultArr[st.pop().idx] = "-1";
         }
-        return cnt;
+
+        for(String x : resultArr) {
+            sb.append(x + " ");
+        }
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
     }
 
-    public static void main(String args[]) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int result = 0;
-        for(int i=1; i<=n; i++) {
-            result += getHansuCnt(i);
+    public static class Nums {
+        int idx;
+        String data;
+
+        public Nums(int idx, String data) {
+            this.idx=idx;
+            this.data=data;
         }
-        System.out.println(result);
+
     }
 }
