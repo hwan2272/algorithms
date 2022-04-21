@@ -7,31 +7,41 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.*;
 public class TEST2 {
-    static StringBuilder sb = new StringBuilder();
-    
-    public static void main(String args[]) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        String input = br.readLine();
-        int n = Integer.valueOf(input.split(" ")[0]);
-        int goalMoney = Integer.valueOf(input.split(" ")[1]);
-        int[] moneyArr = new int[n];
-        int cnt = 0;
-        for(int i=0; i<n; i++) {
-            moneyArr[i] = Integer.valueOf(br.readLine());
-        }
-        Arrays.sort(moneyArr);
+    static StringBuilder sb = new StringBuilder();   
+    static int n; 
+    static int[] queensArr;
+    static int cnt;
 
-        for(int i=moneyArr.length-1; i>-1; i--) {
-            if(moneyArr[i] <= goalMoney && goalMoney > 0) {
-                cnt += goalMoney/moneyArr[i];
-                goalMoney = goalMoney%moneyArr[i];
+    public static boolean check(int row) {
+        for(int i=0; i<row; i++) {
+            if(queensArr[i] == queensArr[row]) {
+                return false;
+            }
+            else if(Math.abs(queensArr[i] - queensArr[row]) == Math.abs(i - row)) {
+                return false;
             }
         }
-        sb.append(cnt);
-        bw.write(sb.toString());
-        bw.flush();
-        bw.close();
+        return true;
+    }
 
+    public static int backTracking(int row) {
+        int r= 0;
+        if(row==n) return 1;
+
+        for(int i=0; i<n; i++) {
+            queensArr[row] = i;
+            if(check(row)) {
+                r += backTracking(row+1);
+            }
+        }
+        return r;
+    }
+
+    public static void main(String args[]) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        queensArr = new int[n];
+        cnt = backTracking(0);
+        System.out.println(cnt);
     }
 }
