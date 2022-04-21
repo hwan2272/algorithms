@@ -7,41 +7,47 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.*;
 public class TEST2 {
-    static StringBuilder sb = new StringBuilder();   
-    static int n; 
-    static int[] queensArr;
-    static int cnt;
-
-    public static boolean check(int row) {
-        for(int i=0; i<row; i++) {
-            if(queensArr[i] == queensArr[row]) {
-                return false;
-            }
-            else if(Math.abs(queensArr[i] - queensArr[row]) == Math.abs(i - row)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static int backTracking(int row) {
-        int r= 0;
-        if(row==n) return 1;
-
-        for(int i=0; i<n; i++) {
-            queensArr[row] = i;
-            if(check(row)) {
-                r += backTracking(row+1);
-            }
-        }
-        return r;
-    }
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String args[]) throws Exception {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        queensArr = new int[n];
-        cnt = backTracking(0);
+        List<Times> arr = new ArrayList();
+        int n = sc.nextInt();
+        for(int i=0; i<n; i++) {
+            int s = sc.nextInt();
+            int e = sc.nextInt();
+            Times obj = new Times(s, e);
+            arr.add(obj);
+        }
+        
+        int cnt = 0;
+        Collections.sort(arr);
+        int et = 0;
+        for(Times t : arr) {
+            if(t.startT >= et) {
+                cnt++;
+                et = t.endT;
+            }
+        }
+
         System.out.println(cnt);
+    }
+
+    public static class Times implements Comparable<Times> {
+        int startT;
+        int endT;
+
+        public Times(int startT, int endT) {
+            this.startT=startT;
+            this.endT=endT;
+        }
+
+        @Override
+        public int compareTo(Times o) {
+            if(o.endT == this.endT) return this.startT-o.startT;
+            else return this.endT-o.endT;
+
+        }
+        
     }
 }
